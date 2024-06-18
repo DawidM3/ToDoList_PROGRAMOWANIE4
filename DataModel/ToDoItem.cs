@@ -1,7 +1,50 @@
-﻿namespace ToDoList.DataModel;
+﻿using System;
+using System.ComponentModel;
 
-public class ToDoItem
+namespace ToDoList.DataModel
 {
-    public string Description { get; set; } 
-    public bool IsChecked { get; set; }
+    public class ToDoItem : INotifyPropertyChanged
+    {
+        private string _description = String.Empty;
+        private bool _isChecked;
+
+        public string Description
+        {
+            get => _description;
+            set
+            {
+                if (_description != value)
+                {
+                    _description = value;
+                    OnPropertyChanged(nameof(Description));
+                }
+            }
+        }
+
+        public bool IsChecked
+        {
+            get => _isChecked;
+            set
+            {
+                if (_isChecked != value)
+                {
+                    _isChecked = value;
+                    OnPropertyChanged(nameof(IsChecked));
+                    OnCheckedChanged();
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void OnCheckedChanged()
+        {
+            // Ta metoda zostanie zaimplementowana później
+        }
+    }
 }

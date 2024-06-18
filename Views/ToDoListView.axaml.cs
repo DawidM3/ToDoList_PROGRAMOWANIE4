@@ -1,13 +1,17 @@
-using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
+using Avalonia.Controls.Primitives;
 
-namespace ToDoList.Views;
-
-public partial class ToDoListView : UserControl
+namespace ToDoList.Views
 {
-    public ToDoListView()
+    public partial class ToDoListView : UserControl
     {
-        InitializeComponent();
+        public ToDoListView()
+        {
+            InitializeComponent();
+        }
+       
+    
+
+ 
     }
 }

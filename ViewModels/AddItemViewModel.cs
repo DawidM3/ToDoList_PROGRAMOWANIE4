@@ -1,6 +1,10 @@
-﻿
-using ReactiveUI;
+﻿using ReactiveUI;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reactive;
+using System.Text;
+using System.Threading.Tasks;
 using ToDoList.DataModel;
 
 namespace ToDoList.ViewModels
@@ -11,7 +15,7 @@ namespace ToDoList.ViewModels
 
         public ReactiveCommand<Unit, ToDoItem> OkCommand { get; }
         public ReactiveCommand<Unit, Unit> CancelCommand { get; }
-
+        
         public AddItemViewModel()
         {
             var isValidObservable = this.WhenAnyValue(

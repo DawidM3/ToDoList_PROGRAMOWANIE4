@@ -1,14 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using ToDoList.DataModel;
 
-namespace ToDoList.Services;
-
-public class ToDoListService
+namespace ToDoList.Services
 {
-    public IEnumerable<ToDoItem> GetItems() => new[]
+    public class ToDoListService
     {
-        new ToDoItem { Description = "Projekty" },
-        new ToDoItem { Description = "Zaliczenia" },
-        new ToDoItem { Description = "Egazminy" },
-    };
+        public IEnumerable<ToDoItem> GetItems() => new[]
+        {
+            new ToDoItem { Description = "Kolokwium Programowanie" },
+            new ToDoItem { Description = "Zapłać za internet" },
+            new ToDoItem { Description = "kup jabłka" },
+        };
+    }
 }

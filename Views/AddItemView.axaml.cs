@@ -1,13 +1,14 @@
-using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
 
-namespace ToDoList.Views;
-
-public partial class AddItemView : UserControl
+namespace ToDoList.Views
 {
-    public AddItemView()
+    public partial class AddItemView : UserControl
     {
-        InitializeComponent();
+        public AddItemView()
+        {
+            InitializeComponent();
+            this.Width = 512;
+            this.Height = 328;
+        }
     }
 }

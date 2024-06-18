@@ -7,6 +7,10 @@ namespace ToDoList.Views
         public MainWindow()
         {
             InitializeComponent();
+
+            this.Width = 720;
+            this.Height = 480;
+
         }
     }
 }

@@ -1,7 +1,5 @@
-﻿
-using ReactiveUI;
+﻿using ReactiveUI;
 using System;
-using System.Reactive;
 using System.Reactive.Linq;
 using ToDoList.DataModel;
 using ToDoList.Services;
@@ -10,27 +8,23 @@ namespace ToDoList.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        private ViewModelBase _contentViewModel;
-        public ToDoListViewModel ToDoListViewModel { get; }
-
         //this has a dependency on the ToDoListService
-        public ReactiveCommand<ToDoItem, Unit> DeleteItemCommand { get; }
-        public MainWindowViewModel()
+
+        private ViewModelBase _contentViewModel;
+         public MainWindowViewModel()
         {
             var service = new ToDoListService();
-            ToDoListViewModel = new ToDoListViewModel(service.GetItems());
-            _contentViewModel = ToDoListViewModel;
-            DeleteItemCommand = ReactiveCommand.Create<ToDoItem>(DeleteItem);
+            ToDoList = new ToDoListViewModel(service.GetItems());
+            _contentViewModel = ToDoList;
         }
-        private void DeleteItem(ToDoItem item)
-        {
-            ToDoListViewModel.ListItems.Remove(item);
-        }
+        
         public ViewModelBase ContentViewModel
         {
             get => _contentViewModel;
             private set => this.RaiseAndSetIfChanged(ref _contentViewModel, value);
         }
+
+        public ToDoListViewModel ToDoList { get; }
 
         public void AddItem()
         {
@@ -40,13 +34,14 @@ namespace ToDoList.ViewModels
                 addItemViewModel.OkCommand,
                 addItemViewModel.CancelCommand.Select(_ => (ToDoItem?)null))
                 .Take(1)
+                
                 .Subscribe(newItem =>
                 {
                     if (newItem != null)
                     {
-                        ToDoListViewModel.ListItems.Add(newItem);
+                        ToDoList.ListItems.Add(newItem );
                     }
-                    ContentViewModel = ToDoListViewModel;
+                    ContentViewModel = ToDoList;
                 });
 
             ContentViewModel = addItemViewModel;
